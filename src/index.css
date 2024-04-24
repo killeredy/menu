@@ -1,0 +1,38 @@
+body{
+    background-color: black;
+}
+
+
+#root,
+#canvas-container,
+canvas{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+#root-menu{
+    width: 100vw;
+    height: 100vh;
+}
+
+.home{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.home.hide{
+    opacity: 0;
+    display: none;
+}

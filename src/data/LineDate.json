@@ -1,0 +1,42 @@
+[
+  {
+    "name": "ilustracao",
+    "title": "Ilustrações",
+    "posZ": {
+      "ilustracao": 0.23,
+      "d3": -1.08,
+      "quadrinhos": 0.9,
+      "html": -0.39
+    }
+  },
+  {
+    "name": "d3",
+    "title": "Imagens 3D",
+    "posZ": {
+      "d3": -1,
+      "ilustracao": 0.3,
+      "quadrinhos": 0.9,
+      "html": -0.3
+    }
+  },
+  {
+    "name": "quadrinhos",
+    "title": "Quadrinhos",
+    "posZ": {
+      "ilustracao": 0.15,
+      "d3": -1.08,
+      "quadrinhos": 0.85,
+      "html": -0.455
+    }
+  },
+  {
+    "name": "html",
+    "title": "HTML",
+    "posZ": {
+      "ilustracao": 0.3,
+      "d3": -1.08,
+      "quadrinhos": 0.9,
+      "html": -0.39
+    }
+  }
+]
