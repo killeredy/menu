@@ -1,0 +1,19 @@
+              {/* <EffectComposer>
+          {selMesh.length > 0 && (
+            <SelectiveBloom
+              lights={[lightRef1]}
+              selection={selMesh}
+              selectionLayer={2}
+              intensity={2.0}
+              blurPass={undefined}
+              width={Resizer.AUTO_SIZE} // render width
+              height={Resizer.AUTO_SIZE} // render height
+              kernelSize={KernelSize.LARGE} // blur kernel size
+              luminanceThreshold={0.1} // luminance threshold. Raise this value to mask out darker elements in the scene.
+              luminanceSmoothing={0.025}
+            />
+          )}
+          <Vignette eskil={false} offset={0.1} darkness={1} />
+        </EffectComposer> */}
+
+
