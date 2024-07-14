@@ -1,7 +1,0 @@
-inicial =  position:[0,0] opacity:0 display: none, callBack: none;
-open =  position[1,1], opacity: 1 display: block, calback: showImagens();
-finish =  
-     onlyClose = position[2,2], opacity: 1, display: block, callback: CloseMenu();
-     openSubPage = position[0,0], opacity, 1, display: block, callback: reloadLoadSubPage();
-     openPage =  position:[0,0] opacity:0 display: none, callBack: loadPages();
-    

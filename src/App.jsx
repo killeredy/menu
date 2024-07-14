@@ -1,44 +1,50 @@
-import { useState, lazy, Suspense, useEffect} from "react";
+import { useState, lazy, Suspense, useEffect } from "react";
 import "./App.scss";
-
-
+import MenuMobile from "./Componentes/Mobile/2d/MenuMobile";
 
 function App() {
   const [menu, setMenu] = useState({
     listPaginas: [],
     paginasCurrent: [],
-    sobre: ""
+    sobre: "",
   });
-  
-  
-  const Menu3D = lazy(() => import("./Componentes/Menu3D"));
+  const maxWidth = 576;
+  const [isMobile, setIsMobile] = useState(false);
+  const MenuDesktop = lazy(() => import("./Componentes/desktop/MenuDesktop"));
 
   useEffect(() => {
-    fetch(url + "/wp-json/lamenu/v1/menu-pgs")
-      .then((response) => response.json())
-      .then((data) => {
         const newMenu = { ...menu };
-        newMenu.listPaginas = data;
-        newMenu.paginasCurrent = data;
-        
-
-        newMenu.sobre =  data.filter((elem) =>{
-          return elem.show !=  true;
-        } )[0]
-
-
-
+        newMenu.listPaginas = menu_data.data;
+        newMenu.paginasCurrent = menu_data.data;
+        newMenu.sobre = menu_data.data.filter((elem) => {
+          return elem.show != true;
+        })[0]
         setMenu(newMenu);
-      })
-      .catch((error) => console.error(error));
   }, []);
+
+
+  useEffect(() => {
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const handleResize = () => {
+    setIsMobile(window.innerWidth <= maxWidth);
+  };
 
   return (
     <>
-      {menu.listPaginas && (
-        <Suspense>
-            <Menu3D menu={menu} setMenu={(e)=> setMenu(e)} />        
-        </Suspense>
+      {menu.listPaginas.length >0  && ( 
+          <Suspense>
+            {isMobile ? (
+              <MenuMobile menu={menu} setMenu={(e) => setMenu(e)} />
+            ) : (
+              <MenuDesktop menu={menu} setMenu={(e) => setMenu(e)} />
+            )}
+          </Suspense>
       )}
     </>
   );

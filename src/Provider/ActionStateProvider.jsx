@@ -5,7 +5,7 @@ export const ActionContext =  createContext();
 export function ActionStateProvider({children}){
     const [actionControl, setActionControl] = useState('idle');
     const changeAction = (e) =>{
-        console.log('mudou')
+        // console.log('mudou')
         setActionControl(e)
     }
     return (
