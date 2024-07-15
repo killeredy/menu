@@ -1,0 +1,18 @@
+@mixin animatioin-open-close {
+    transition: width ease-in 0.2s;
+    animation-duration: $animation;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear;
+}
+
+@mixin after-line {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: black;
+    transform: scaleX(0);
+    transform-origin: 0;
+}

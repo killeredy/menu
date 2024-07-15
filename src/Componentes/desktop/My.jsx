@@ -1,6 +1,7 @@
 import React, { memo, useEffect, useRef, useState } from 'react'
 import { useGLTF, useAnimations, Text, Html} from '@react-three/drei'
 import * as THREE from "three";
+import Sobre from '../Sobre';
 
 
 function My({sobreData, setSobre, animacao = "pouso" }){
@@ -11,10 +12,20 @@ function My({sobreData, setSobre, animacao = "pouso" }){
   const { sobre } = sobreData;
   const [fade, SetFade] = useState(0.1)
   const [pz, setPz] = useState(10);
+
+  
+
   
   useEffect(()=>{
     materials.caracte.roughness = 0.4
-    changeAnimacao(animacao);
+    console.log("show mey")
+    
+    
+    setTimeout(() => {
+      changeAnimacao(animacao);
+    }, 1500);
+
+
   },[])
   
 
@@ -68,22 +79,7 @@ function My({sobreData, setSobre, animacao = "pouso" }){
         </group>
         {showSobre && (
            <Html position={[0, 0, 0]} wrapperClass="sobre-container" transform distanceFactor={1.0}   >              
-              <button onClick={(e) => handleSetSobre(e)} style={{display: "block", margin: "auto"}} > <h3> { sobre.title }</h3></button>              
-              <div className='btns-social-media'>
-                {(sobre.social_media.length > 0) && (
-                  <div key={0} style={{display: 'flex', gap: '0.8rem', marginTop: "0.5rem"}}>
-                    {sobre.social_media.map((elem, index) =>{
-                      return(
-                        <div key={index} >
-                          <a  href={elem.url} target={"_blank"} rel="noopener noreferrer">
-                            <img src={elem.img} alt="" title={elem.label} height={'50'} />
-                          </a>
-                        </div>
-                      )
-                    })}
-                  </div>
-                )}
-              </div>
+            {/* <Sobre /> */}
           </Html>         
         )}
       </group>

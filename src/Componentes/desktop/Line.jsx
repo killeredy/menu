@@ -17,15 +17,18 @@ function Line({
   setSelBlur,
   widthScale
 }) {
+  
   const [line, setLine] = useState();
   const [myHover, setMyHover] = useState(false);
   const [posX, setPosX] = useState();
+  
 
   useEffect(() => {
     const lineMesh = lineMeshInput.geometry.clone();
     lineMesh.name = current.slug;
     setLine(lineMesh)
-    setPosX(width ? current.index * width : 0);
+    const larg =  width ? current.index * width : 0;
+    setPosX(larg);
   }, [width])
 
 
@@ -41,29 +44,33 @@ function Line({
   }
 
 
-
-
   return (
-    <group position-x={posX} >
-      <group scale-x={widthScale} >
-        <mesh name={current.slug} onPointerDown={(e) => onClick(current.page_id)} onPointerLeave={(e) => handleMouseOver()} onPointerEnter={(e) => handleMouseEnter()}  >
-          <primitive object={lineMeshInput.geometry} />
-          <meshBasicMaterial color={'black'} alphaMap={mask} transparent={true} />
-        </mesh>
-        <LineBrilho lineMesh={line} />
-        <Html color={'black'} position={[0, 1.24, 0]} wrapperClass="text-container" transform distanceFactor={1.0}   >
-            <div className={`texts ${showText ? "show" : ""} `}>
-              <div className={`img-show ${myHover ? "show" : ""}`} style={{ backgroundImage: `url(${current.img_d}})` }} ></div>
-              <div className={`img-body ${  current.pagesList  ? "menu-principal" : "menu-sub" }`}  >
-                <h2>{current.title}</h2>
-                <div className="desc">
-                  <StringToText text={current.desc} />
+    <>
+      {line &&  mask && (
+        <>
+        <group position-x={posX} >
+          <group scale-x={widthScale} >
+            <mesh name={current.slug} onPointerDown={(e) => onClick(current.page_id)} onPointerLeave={(e) => handleMouseOver()} onPointerEnter={(e) => handleMouseEnter()}  >
+              <primitive object={lineMeshInput.geometry} />
+              <meshBasicMaterial color={'black'} alphaMap={mask ? mask : {}} transparent={true} />
+            </mesh>
+            <LineBrilho lineMesh={line} />
+            <Html color={'black'} position={[0, 1.24, 0]} wrapperClass="text-container" transform distanceFactor={1.0}   >
+              <div className={`texts ${showText ? "show" : ""} `}>
+                <div className={`img-show ${myHover ? "show" : ""}`} style={{ backgroundImage: `url(${current.img_d}})` }} ></div>
+                <div className={`img-body ${current.pagesList ? "menu-principal" : "menu-sub"}`}  >
+                  <h2>{current.title}</h2>
+                  <div className="desc">
+                    <StringToText text={current.desc} />
+                  </div>
                 </div>
               </div>
-            </div>
-          </Html>
-      </group>
-    </group>
+            </Html>
+          </group>
+        </group>
+        </>
+      )}
+    </>
   );
 }
 

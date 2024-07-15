@@ -1,20 +1,4 @@
 .menu-3d-content {
-    position: fixed;
-    opacity: 0;
-    height: 0;
-    width: 100vw;
-    margin: 0;
-    top: 0;
-    left: 0;
-    transition: opacity 0.3s ease-out;
-    background: rgb(238,238,238);
-    background: linear-gradient(0deg, rgba(238,238,238,1) 0%, rgba(241,241,241,1) 20%, rgb(211, 211, 211) 25%, rgba(255,255,255,1) 56%, rgba(250,250,250,1) 100%);
-    
-    &.show {
-        height: 100vh;
-        opacity: 1;
-    }
-
     .btns-social-media{
         display: flex;
         flex-direction: column;
@@ -31,7 +15,6 @@
             }
         }
     }
-    
 }
 
 .home-pictures {
@@ -51,6 +34,7 @@
     left: 0;
     width: 100vw;
     z-index: 10000;
+    pointer-events: none;
     button{
         border: none;
         outline: none;       
@@ -62,82 +46,7 @@
         color: white;
     }
 
-    .btn-content{
-        position: absolute;
-        right: 2.5%;
-        top: 2.5%;
-        display: flex;
-        margin-top: 0.5%;
-        button{
 
-            
-
-
-
-            .line-menu-content{
-                position: absolute;
-                width: 17%;
-                height: 50%;
-
-                top: 25%;
-                left: 70%;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                transform-origin: 50%;
-                transition: transform 0.1s ease-in-out;
-                gap:5px;
-
-                .line-menu{
-                    border-radius: 10px;
-                    width: 100%;
-                    height: 10%;
-                    display: block;
-                    background-color: aliceblue;
-                    transform-origin: 100% 50%;
-                    transition: transform ease-in-out 0.1s;
-
-                    .line-midle{
-                        transform-origin: 50%;
-                    }
-                }
-            }
-
-            &.open.show{
-                .line-menu-content{
-                    // transform: scaleX(0.5)
-                }
-
-                .line-top{
-                    transform: rotate(-50deg) scaleX(1.2);
-                }
-                .line-midle{
-                    transform: scale(0);
-                }
-
-                .line-bottom{
-                    transform: rotate(50deg) scaleX(1.2);
-                }
-            }
-
-            img{
-                width: 100%;
-                height: 100%;
-            }
-
-            &.back{
-                clip-path: polygon(0 0, 95% 0, 100% 100%, 5% 100%);
-                transform: translateX(100%);
-                opacity: 0;
-                transition: transform 0.2s ease-out, opacity 0.2s linear;
-
-                &.show{
-                    transform: translateX(0%);
-                    opacity: 1;
-                }
-            }
-        }
-    }
 
     .home-pictures{
         button{
