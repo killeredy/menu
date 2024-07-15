@@ -1,23 +1,27 @@
-import { Html, Text } from "@react-three/drei";
+import { Html, Text, useTexture } from "@react-three/drei";
 import LineTexture from "./LineTexture";
 import * as THREE from "three";
 
 
 import LineBrilho from "./LineBrilho";
-import { memo, useCallback, useEffect, useState } from "react";
+import { memo, useCallback, useContext, useEffect, useState } from "react";
 import StringToText from "../StringToText";
+import { IntenalContext } from "../../Provider/InternalProvider";
+import { animationSteps, StatesMenu } from "../../models/StateMenu";
 
 function Line({
   lineMeshInput,
   current,
   width,
   showText,
-  mask,
   onClick,
   setSelBlur,
-  widthScale
+  widthScale,
+  alphaOffset = 0
 }) {
-  
+  const { config3d } = useContext(IntenalContext);
+  const alphaMap = useTexture(config3d.assets + "img/mask.jpg");
+
   const [line, setLine] = useState();
   const [myHover, setMyHover] = useState(false);
   const [posX, setPosX] = useState();
@@ -32,6 +36,15 @@ function Line({
   }, [width])
 
 
+  useEffect(() => {
+    alphaMap.repeat.set(1, 0.28)
+    alphaMap.center.set(0.5, 0.09)
+    alphaMap.name = 'teste'
+  }, [])
+
+
+  
+  alphaMap.center.set(0, alphaOffset.current)
 
   const handleMouseOver = () => {
     setSelBlur(false)
@@ -46,13 +59,13 @@ function Line({
 
   return (
     <>
-      {line &&  mask && (
+      {line  && (
         <>
         <group position-x={posX} >
           <group scale-x={widthScale} >
             <mesh name={current.slug} onPointerDown={(e) => onClick(current.page_id)} onPointerLeave={(e) => handleMouseOver()} onPointerEnter={(e) => handleMouseEnter()}  >
               <primitive object={lineMeshInput.geometry} />
-              <meshBasicMaterial color={'black'} alphaMap={mask ? mask : {}} transparent={true} />
+              <meshBasicMaterial color={'black'} alphaMap={alphaMap} transparent={true} />
             </mesh>
             <LineBrilho lineMesh={line} />
             <Html color={'black'} position={[0, 1.24, 0]} wrapperClass="text-container" transform distanceFactor={1.0}   >

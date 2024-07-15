@@ -4,29 +4,22 @@ import * as THREE from "three";
 import Sobre from '../Sobre';
 
 
-function My({sobreData, setSobre, animacao = "pouso" }){
+function My({ menu, animacao = "pouso" }){
+  
   const group = useRef()
   const { nodes, materials, animations } = useGLTF(menu_data.path_model + 'my.gltf')
   const { actions, names, mixer } = useAnimations(animations, group)
   const [showSobre, setShowSobre] =  useState(false);
-  const { sobre } = sobreData;
   const [fade, SetFade] = useState(0.1)
   const [pz, setPz] = useState(10);
-
-  
-
   
   useEffect(()=>{
-    materials.caracte.roughness = 0.4
-    console.log("show mey")
-    
-    
+    materials.caracte.roughness = 0.4   
     setTimeout(() => {
       changeAnimacao(animacao);
-    }, 1500);
+    }, 500);
 
-
-  },[])
+ },[])
   
 
   const changeAnimacao =(anim)=>{
@@ -38,7 +31,6 @@ function My({sobreData, setSobre, animacao = "pouso" }){
       }
 
       if(actions[anim]){
-        console.log(fade)
         actions[anim]?.reset()?.fadeIn(fade)?.play();    
         mixer.addEventListener('finished', (e) =>{
           SetFade(0.5)
@@ -56,16 +48,11 @@ function My({sobreData, setSobre, animacao = "pouso" }){
   }
 
 
-  const handleSetSobre =()=>{
-    if(setSobre){
-      setSobre();
-    }
-  }
 
 
 
   return (
-    <group ref={group} dispose={null} position={[0,pz,1]} onPointerDown={(e)=> handleSetSobre()} >
+    <group ref={group} dispose={null} position={[0,pz,1]}  >
       <group name="Scene">
         <group name="Armature" rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
           <primitive object={nodes.mixamorigHips} />          
@@ -79,7 +66,7 @@ function My({sobreData, setSobre, animacao = "pouso" }){
         </group>
         {showSobre && (
            <Html position={[0, 0, 0]} wrapperClass="sobre-container" transform distanceFactor={1.0}   >              
-            {/* <Sobre /> */}
+            <Sobre menu={menu} />
           </Html>         
         )}
       </group>

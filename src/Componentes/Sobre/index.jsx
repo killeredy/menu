@@ -1,13 +1,12 @@
 import { useContext } from "react";
 import { IntenalContext } from "../../Provider/InternalProvider";
 
-export default function Sobre() {
-    const {menu} = useContext(IntenalContext);
-    console.log(menu);
+export default function Sobre({menu}) {
 
     const removeSlash = (string) => {
         return string.replace(/\\/g, "")
     }
+
 
 
     return (

@@ -33,7 +33,8 @@ export function LinesList() {
   const [showMy, setShowMy] = useState(false);
 
 
-
+  const alphaOffset =  useRef(animationSteps.opening.init)
+  
 
   useEffect(() => {
     const box = new THREE.Box3();
@@ -49,14 +50,7 @@ export function LinesList() {
     alphaMap.center.set(0, offsetInit)
   }, []);
 
-  useEffect(() => {
-    if (nextPg != null) {
-      setCurrentPg(nextPg)
-      setNextPag(null)
-      setUpDatePage(false);
-    }
-    console.log('upDatePage')
-  }, [upDatePage])
+
 
 
   useEffect(() => { 
@@ -66,6 +60,17 @@ export function LinesList() {
       setExternalMenu({ ...externalMenu, content: StatesMenu.closing })
     }
   }, [menu])
+
+
+  useEffect(() => { 
+    console.log(nextPg)
+    if(nextPg !=  null){
+      const newCPg =  [...nextPg];
+      setCurrentPg(newCPg)
+      setNextPag(null);
+      setUpDatePage(false);
+    }
+  }, [upDatePage])
 
 
 
@@ -78,7 +83,7 @@ export function LinesList() {
         let newOffset = offsetInit + animationSteps.steps * delta
         newOffset = newOffset > offsetFinal ? offsetFinal : newOffset;
         setOffisetInit(newOffset);
-        alphaMap.center.set(0, newOffset);
+        alphaOffset.current =  newOffset
 
       }
       else {
@@ -99,8 +104,6 @@ export function LinesList() {
             setMenu({ ...menu, currentPg: nextPg })
           }
         }
-
-
       }
     }
   });
@@ -144,6 +147,7 @@ export function LinesList() {
     setOffisetFinal(final);
   }
 
+  console.log(externalMenu);
 
   return (
     <>
@@ -160,7 +164,7 @@ export function LinesList() {
                     width={size.x}
                     showText={showText}
                     mask={alphaMap}
-                    alphaOffSet={offset}
+                    alphaOffset={alphaOffset}
                     onClick={() => handleSetPage(current)}
                     setSelBlur={(e) => handleSetBlur(e, lineMesh)}
                     widthScale={widthScale}
@@ -171,8 +175,8 @@ export function LinesList() {
           })}
         </group>
       </group>
-      {showMy  && (
-        <My sobreData={menu} setSobre={(e) => handleSobre(menu.sobre)} />
+      {externalMenu.menu !=  "close"  && (
+        <My menu={menu} />
       )}
       <ambientLight intensity={2} />
     </>);
